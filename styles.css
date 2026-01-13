@@ -7,3 +7,8 @@ p {
     background-color: black;
 }
 
+.beanie {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: royalblue;
+    background-color: chartreuse;
+}
