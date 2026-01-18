@@ -7,17 +7,15 @@ export async function onRequest(context) {
       return new Response('Username required', { status: 400 });
     }
     
-    const mojangRes = await fetch(
+    const response = await fetch(
       `https://playerdb.co/api/player/minecraft/${username}`
     );
     
+    const data = await response.json();
+
     // Return the status code so we can see what's happening
     return new Response(JSON.stringify({
-      mojangStatus: mojangRes.status,
-      mojangOk: mojangRes.ok,
-      username: username,
-      ourResponse: mojangRes,
-      url: `https://api.mojang.com/users/profiles/minecraft/${username}`
+        data 
     }), {
       headers: { 'Content-Type': 'application/json' }
     });
