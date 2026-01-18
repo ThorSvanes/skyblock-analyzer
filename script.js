@@ -20,10 +20,10 @@ function myFunction() {
 }
 
 async function getHypixelPlayerData(username) {
-//   const apiUrl = `https://api.mojang.com/users/profiles/minecraft/${username}`;
+  const apiUrl = `https://api.mojang.com/users/profiles/minecraft/${username}`;
 // const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
-// const response = await fetch(proxyUrl);
+  const response = await fetch(apiUrl);
 
-  const response = await fetch(`/api/player?username=${username}`)
+  // const response = await fetch(`/api/player?username=${username}`)
   console.log(response);
 }
