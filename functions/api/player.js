@@ -8,7 +8,12 @@ export async function onRequest(context) {
     }
     
     const mojangRes = await fetch(
-      `https://api.mojang.com/users/profiles/minecraft/${username}`
+      `https://api.mojang.com/users/profiles/minecraft/${username}`,
+      {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+      }
     );
     
     // Return the status code so we can see what's happening
