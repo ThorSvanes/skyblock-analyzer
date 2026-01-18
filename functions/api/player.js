@@ -11,21 +11,19 @@ export async function onRequest(context) {
       `https://api.mojang.com/users/profiles/minecraft/${username}`
     );
     
-    if (!mojangRes.ok) {
-      return new Response('Player not found', { status: 404 });
-    }
-    
-    const mojangData = await mojangRes.json();
-    
-    return new Response(JSON.stringify(mojangData.id), {
+    // Return the status code so we can see what's happening
+    return new Response(JSON.stringify({
+      mojangStatus: mojangRes.status,
+      mojangOk: mojangRes.ok,
+      username: username,
+      url: `https://api.mojang.com/users/profiles/minecraft/${username}`
+    }), {
       headers: { 'Content-Type': 'application/json' }
     });
     
   } catch (error) {
-    // Return the actual error so we can see what's wrong
     return new Response(JSON.stringify({ 
-      error: error.message,
-      stack: error.stack 
+      error: error.message 
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
