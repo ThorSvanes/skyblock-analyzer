@@ -16,6 +16,7 @@ export async function onRequest(context) {
       mojangStatus: mojangRes.status,
       mojangOk: mojangRes.ok,
       username: username,
+      ourResponse: mojangRes,
       url: `https://api.mojang.com/users/profiles/minecraft/${username}`
     }), {
       headers: { 'Content-Type': 'application/json' }
