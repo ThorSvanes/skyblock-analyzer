@@ -22,5 +22,5 @@ function myFunction() {
 async function getHypixelPlayerData(username) {
   const response = await fetch(`/api/player?username=${username}`)
   const data = await response.json();
-  console.log(data.data.player.id);
+  console.log(data);
 }

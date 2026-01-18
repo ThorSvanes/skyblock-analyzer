@@ -11,12 +11,27 @@ export async function onRequest(context) {
       `https://playerdb.co/api/player/minecraft/${username}`
     );
     
-    const data = await response.json();
+    const playerData = await response.json();
 
-    // Return the status code so we can see what's happening
-    return new Response(JSON.stringify({
-        data 
-    }), {
+    if (!playerData.success) {
+      return new Response('Player not found', { status: 404 });
+    }
+    
+    const uuid = playerData.data.player.id.replace(/-/g, ''); // Remove dashes
+    
+    // Get Hypixel SkyBlock data
+    const hypixelRes = await fetch(
+      `https://api.hypixel.net/v2/skyblock/profiles?uuid=${uuid}`,
+      {
+        headers: {
+          'API-Key': context.env.HYPIXEL_API_KEY
+        }
+      }
+    );
+    
+    const hypixelData = await hypixelRes.json();
+    
+    return new Response(JSON.stringify(hypixelData), {
       headers: { 'Content-Type': 'application/json' }
     });
     
